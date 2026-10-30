@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense &amp; Budget Visualizer</title>
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- App styles -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── HEADER ──────────────────────────────────────────── -->
+  <header class="app-header">
+    <div class="logo">💰 Expense Visualizer</div>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </header>
+
+  <!-- ── MAIN DASHBOARD ──────────────────────────────────── -->
+  <main class="dashboard">
+
+    <!-- LEFT PANEL -->
+    <section class="left-panel">
+
+      <!-- Summary Card -->
+      <div class="card summary-card">
+        <p class="card-label">Total Spending</p>
+        <p id="totalAmount" class="total-amount">Rp 0</p>
+        <p id="transactionCount" class="transaction-count">0 transaction(s)</p>
+      </div>
+
+      <!-- Chart Card -->
+      <div class="card chart-card">
+        <h3 class="card-title">Spending by Category</h3>
+        <div class="chart-wrapper">
+          <canvas id="pieChart"></canvas>
+          <p id="chartEmpty" class="empty-state hidden">No data yet.<br/>Add an expense to see the chart.</p>
+        </div>
+      </div>
+
+      <!-- Monthly Summary Card -->
+      <div class="card monthly-card">
+        <h3 class="card-title">Monthly Summary</h3>
+        <ul id="monthlySummaryList" class="monthly-list"></ul>
+        <p id="monthlyEmpty" class="empty-state">No data yet.</p>
+      </div>
+
+    </section>
+
+    <!-- RIGHT PANEL -->
+    <section class="right-panel">
+
+      <!-- Add Expense Form Card -->
+      <div class="card form-card">
+        <h3 class="card-title">Add Expense</h3>
+        <form id="expenseForm" novalidate>
+
+          <div class="form-group">
+            <label for="itemName">Item Name</label>
+            <input id="itemName" type="text" placeholder="e.g. Lunch" autocomplete="off" />
+            <span class="error-msg" id="nameError" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="amount">Amount (Rp)</label>
+            <input id="amount" type="number" min="1" placeholder="e.g. 25000" />
+            <span class="error-msg" id="amountError" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category">
+              <!-- Options populated by JS -->
+            </select>
+            <span class="error-msg" id="categoryError" role="alert" aria-live="polite"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full">Add Expense</button>
+
+        </form>
+      </div>
+
+      <!-- Custom Categories Card -->
+      <div class="card categories-card">
+        <h3 class="card-title">Custom Categories</h3>
+        <div class="add-category-row">
+          <input id="newCategory" type="text" placeholder="New category name" autocomplete="off" />
+          <button id="addCategoryBtn" class="btn btn-secondary" aria-label="Add new category">Add</button>
+        </div>
+        <span class="error-msg" id="categoryAddError" role="alert" aria-live="polite"></span>
+        <ul id="customCategoryList" class="custom-category-list"></ul>
+      </div>
+
+      <!-- Transaction List Card -->
+      <div class="card list-card">
+        <h3 class="card-title">Transactions</h3>
+        <ul id="transactionList" class="transaction-list" role="list"></ul>
+        <p id="listEmpty" class="empty-state">No expenses recorded yet.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Chart.js CDN — must load before script.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- App logic -->
+  <script src="js/script.js"></script>
+
+</body>
+</html>
